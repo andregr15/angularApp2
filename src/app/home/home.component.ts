@@ -13,10 +13,21 @@ export class HomeComponent implements OnInit {
 
   public ofertas: Array<Oferta>;
 
-  constructor(private ofetasService: OfertasService) { }
+  constructor(private ofertasService: OfertasService) { }
 
   ngOnInit() {
-    this.ofertas = this.ofetasService.getOfertas();
+    // this.ofertas = this.ofetasService.getOfertas();
+    this.ofertasService.getOfertas2()
+      .then(
+          ( ofertas: Array<Oferta>) => {
+            console.log('a função resolve() foi resolvida depois de 3 segundos');
+            this.ofertas = ofertas;
+          }
+      ).catch(
+        ( param: any ) => {
+          console.log(param);
+        }
+      );
   }
 
 }
