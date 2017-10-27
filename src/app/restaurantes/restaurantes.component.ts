@@ -10,7 +10,7 @@ import { OfertasService } from '../ofertas.service';
 })
 export class RestaurantesComponent implements OnInit {
 
-  private ofertas: Array<Oferta>;
+  ofertas: Array<Oferta>;
 
   constructor(private ofertasService: OfertasService) { }
 
