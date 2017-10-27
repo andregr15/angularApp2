@@ -11,15 +11,17 @@ import { OfertasService } from '../ofertas.service';
 })
 export class OfertaComponent implements OnInit {
 
-  oferta: Oferta;
+  public oferta: Oferta;
 
   constructor(private ofertasService: OfertasService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    // this.route.params.subscribe((parametro: any) => {
+    //   console.log(parametro.id);
+    // });
     this.ofertasService.getOfertaPorId(this.route.snapshot.params['id'])
-        .then((ofertas: Array<Oferta>) => {
-          console.log(ofertas);
-          this.oferta = ofertas[0];
+        .then((oferta: Oferta) => {
+          this.oferta = oferta;
         }).
         catch((param: any) => console.log(param));
   }

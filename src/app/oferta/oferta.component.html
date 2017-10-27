@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="oferta">
+  <div class="oferta" *ngIf="oferta !== undefined">
 
     <div class="row">
       <div class="col">
-        <h4>{{oferta.descricao_oferta}}</h4>
+        <h4>{{ oferta.descricao_oferta }}</h4>
       </div>
     </div>
 
@@ -14,7 +14,7 @@
         </div>
 
         <div class="thumbnails">
-          <img *ngFor='let img of oferta.imagens | slice:1' [src]='img.url' class="img-fluid"/>
+          <img *ngFor="let imagem of oferta.imagens | slice:1" [src]="imagem.url" class="img-fluid"/>
         </div>
       </div>
 
@@ -28,7 +28,7 @@
 
         <div class="row">
           <div class="col text-center">
-            <h1>R$ {{oferta.valor}}</h1>
+            <h1>R$ {{ oferta.valor }}</h1>
           </div>
         </div>
 
@@ -43,4 +43,6 @@
     </div>
 
   </div>
+  <br/>
+  <br/>
 </div>
