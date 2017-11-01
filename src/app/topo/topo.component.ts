@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { OfertasService } from '../ofertas.service';
 
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { Oferta } from '../shared/oferta.model';
+
+import '../util/rxjs-extensions';
 
 @Component({
   selector: 'app-topo',
@@ -12,21 +15,38 @@ import { Oferta } from '../shared/oferta.model';
 })
 export class TopoComponent implements OnInit {
 
-  public ofertas: Observable<Oferta[]>;
+  private ofertas: Observable<Oferta[]>;
+  private subjectPesquisa: Subject<string> = new Subject<string>();
 
   constructor(private ofertasService: OfertasService) { }
 
   ngOnInit() {
+    this.ofertas = this.subjectPesquisa // retorno ofertas[]
+                       .debounceTime(1000) // executa a ação do switchMap após 1 segundo
+                       .distinctUntilChanged() // para fazer pesquisas distintas
+                       .switchMap(
+                         (termo: string) => {
+                            if (termo.trim() === '') {
+                              // retornar um observable de array de ofertas vazio
+                              return Observable.of<Oferta[]>([]);
+                            }
+                            return this.ofertasService.pesquisaOfertas(termo);
+                          }
+                       )
+                       .catch(
+                         (erro: any) => {
+                           console.log(erro);
+                           return Observable.of<Oferta[]>([]);
+                          }
+                       );
   }
 
   public pesquisa(termoDaBusca: string): void {
-    this.ofertas = this.ofertasService.pesquisaOfertas(termoDaBusca);
-    this.ofertas.subscribe(
-      (ofertas: Oferta[]) => console.log(ofertas),
-      (erro: any) => console.log('Erro status: ', erro.status),
-      () => console.log('fluxo de eventos completo')
-    );
+    this.subjectPesquisa.next(termoDaBusca);
+  }
 
+  public limpaPesquisa(): void {
+    this.subjectPesquisa.next('');
   }
 
 }
