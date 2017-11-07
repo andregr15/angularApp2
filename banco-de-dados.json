@@ -283,6 +283,20 @@
       "complemento": "",
       "formaPagamento": "",
       "id": 14
+    },
+    {
+      "endereco": "teste",
+      "numero": "10",
+      "complemento": "casa a",
+      "formaPagamento": "dinheiro",
+      "id": 15
+    },
+    {
+      "endereco": "Endereço A",
+      "numero": "10",
+      "complemento": "Casa C",
+      "formaPagamento": "debito",
+      "id": 16
     }
   ]
 }
