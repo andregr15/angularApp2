@@ -58,11 +58,11 @@ export class OrdemCompraComponent implements OnInit {
     );
   }
 
-  public getTotal(): number {
-    let total = 0;
+  public remover(item: ItemCarrinho): void {
+    this.carrinhoService.removerQuantidade(item);
+  }
 
-    this.itensCarrinho.map((item: ItemCarrinho) => total += item.valor * item.quantidade);
-
-    return total;
+  public adicionar(item: ItemCarrinho): void {
+    this.carrinhoService.adicionarQuantidade(item);
   }
 }

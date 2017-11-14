@@ -20,9 +20,11 @@
         <div>
           <div class="row">
             <div class="col">
-              <button type="button" class="btn btn-link">-</button>
+              <button type="button" class="btn btn-link" 
+                      (click)="remover(item)">-</button>
               {{ item.quantidade }}
-              <button type="button" class="btn btn-link">+</button>
+              <button type="button" class="btn btn-link"
+                      (click)="adicionar(item)">+</button>
             </div>
           </div>
         </div>
@@ -34,7 +36,7 @@
       
       <div class="form-row">
         <div class="form-group col d-flex justify-content-end">
-          <h4>Total do pedido: {{ getTotal() | currency:'BRL':true }}</h4>
+          <h4>Total do pedido: {{ carrinhoService.totalCarrinhoCompras() | currency:'BRL':true }}</h4>
         </div>
       </div>
       <br />

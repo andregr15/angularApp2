@@ -10,7 +10,7 @@ class CarrinhoService {
 
     public incluirItem(oferta: Oferta) {
 
-        let itemCarrinho = this.itens.find(x => x.id === oferta.id);
+        let itemCarrinho = this.findItem(oferta.id);
         if (itemCarrinho) {
             itemCarrinho.quantidade++;
         } else {
@@ -26,7 +26,30 @@ class CarrinhoService {
             this.itens.push(item);
         }
     }
-}
 
+    public totalCarrinhoCompras(): number {
+        let total = 0;
+        this.itens.map(x => total += x.valor * x.quantidade);
+        return total;
+    }
+
+    public removerQuantidade(item: ItemCarrinho): void {
+        let itemCarrinho = this.findItem(item.id);
+        if (itemCarrinho) {
+            itemCarrinho.quantidade--;
+        }
+    }
+
+    public adicionarQuantidade(item: ItemCarrinho): void {
+        let itemCarrinho = this.findItem(item.id);
+        if (itemCarrinho) {
+            itemCarrinho.quantidade++;
+        }
+    }
+
+    private findItem(id: number): ItemCarrinho {
+        return this.itens.find(x => x.id === id);
+    }
+}
 
 export { CarrinhoService };
