@@ -9,16 +9,22 @@ class CarrinhoService {
     }
 
     public incluirItem(oferta: Oferta) {
-        let item = new ItemCarrinho (
-            oferta.id,
-            oferta.imagens[0],
-            oferta.titulo,
-            oferta.descricao_oferta,
-            oferta.valor,
-            1
-        );
 
-        this.itens.push(item);
+        let itemCarrinho = this.itens.find(x => x.id === oferta.id);
+        if (itemCarrinho) {
+            itemCarrinho.quantidade++;
+        } else {
+            let item = new ItemCarrinho (
+                oferta.id,
+                oferta.imagens[0],
+                oferta.titulo,
+                oferta.descricao_oferta,
+                oferta.valor,
+                1
+            );
+
+            this.itens.push(item);
+        }
     }
 }
 
