@@ -20,7 +20,7 @@ export class OrdemCompraComponent implements OnInit {
     'endereco': new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(120)]),
     'numero': new FormControl(null, [Validators.required, Validators.minLength(1), Validators.maxLength(20)]),
     'complemento': new FormControl(null),
-    'formaPagamento': new FormControl(null, [Validators.required]),
+    'formaPagamento': new FormControl('', [Validators.required]),
   });
 
   constructor(
@@ -44,6 +44,11 @@ export class OrdemCompraComponent implements OnInit {
       this.formulario.get('numero').markAsTouched();
       this.formulario.get('complemento').markAsTouched();
       this.formulario.get('formaPagamento').markAsTouched();
+      return;
+    }
+
+    if (this.carrinhoService.getQuantidadeItensCarrinho() === 0) {
+      alert('Você não selecionou nenhum item!');
       return;
     }
 
