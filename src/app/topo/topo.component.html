@@ -27,7 +27,12 @@
           </div>
 
           <div class="col-md-2 text-right">
-              <a routerLink="/ordem-compra"><img src="/assets/carrinho.png" /></a>
+              <a routerLink="/ordem-compra">
+                <img src="/assets/carrinho.png" />
+                <span *ngIf="carrinhoService.getQuantidadeItensCarrinho() > 0" class="itensCarrinho">
+                  {{ carrinhoService.getQuantidadeItensCarrinho()}}
+                </span>
+              </a>
           </div>
         </div>
       </div>

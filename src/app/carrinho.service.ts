@@ -37,6 +37,9 @@ class CarrinhoService {
         let itemCarrinho = this.findItem(item.id);
         if (itemCarrinho) {
             itemCarrinho.quantidade--;
+            if (itemCarrinho.quantidade <= 0) {
+                this.itens.splice(this.itens.indexOf(itemCarrinho), 1);
+            }
         }
     }
 
@@ -49,6 +52,12 @@ class CarrinhoService {
 
     private findItem(id: number): ItemCarrinho {
         return this.itens.find(x => x.id === id);
+    }
+
+    public getQuantidadeItensCarrinho(): number {
+        let qtd = 0;
+        this.itens.map(x => qtd += x.quantidade);
+        return qtd;
     }
 }
 
