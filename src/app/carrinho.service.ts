@@ -59,6 +59,10 @@ class CarrinhoService {
         this.itens.map(x => qtd += x.quantidade);
         return qtd;
     }
+
+    public limparCarrinho(): void {
+        this.itens = [];
+    }
 }
 
 export { CarrinhoService };

@@ -56,10 +56,14 @@ export class OrdemCompraComponent implements OnInit {
       this.formulario.value.endereco,
       this.formulario.value.numero,
       this.formulario.value.complemento,
-      this.formulario.value.formaPagamento
+      this.formulario.value.formaPagamento,
+      this.carrinhoService.exibirItens()
     ))
     .subscribe(
-      (idPedidoCompra: number) => this.idPedidoCompra = idPedidoCompra
+      (idPedidoCompra: number) => {
+        this.idPedidoCompra = idPedidoCompra;
+        this.carrinhoService.limparCarrinho();
+      }
     );
   }
 
